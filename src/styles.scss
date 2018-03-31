@@ -1,0 +1,139 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+@import "theme";
+
+
+/* This section contains bootstrap overrides that are questionable, they seem to fix bugs / issues */
+
+.nav-tabs {
+  border-bottom-width: 1px; // Removes issue where nav-tabs has a double 1px bottom border;
+}
+
+/* End of section */
+
+html, head, body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  background-color: #f7f7f7;
+  color: #232323;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+p.paragraph + p.paragraph {
+  margin-top: 10px;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  z-index: 2000;
+}
+
+.full-width {
+  width: 100%;
+}
+
+a.link {
+  color: $primary !important;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+*.d-inline-block:not(:first-child) {
+  margin-left: -4px;
+}
+
+nav {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+
+div.nav-profile-wrapper {
+  height: 100%;
+  margin-top: 4px; // Positioning middle adjustments
+
+  a.nav-profile {
+    color: white;
+    text-decoration: none;
+    margin-top: 4px; // Positioning middle adjustments
+
+    .avatar-wrapper {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      background-color: white;
+      vertical-align: middle;
+      margin-top: -4px; // Positioning middle adjustments
+      margin-left: 2px;
+    }
+  }
+}
+
+.content {
+  background-color: white;
+  color: black;
+  margin-top: 25px;
+  border-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+@mixin avatar($width) {
+  display: inline-block;
+  width: 50px;
+  width: $width;
+  height: $width;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+  background-color: grey;
+  border-radius: 999px;
+
+  img {
+    width: 100%;
+    background-size: contain;
+    border-radius: 999px;
+  }
+}
+
+.banner {
+  border-bottom: solid 1px $sc_grey;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+
+  > div {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .info {
+    width: fit-content;
+    line-height: 1.2;
+    display: inline-block;
+
+    .name {
+      font-weight: bold;
+      color: $primary;
+      margin: 0;
+    }
+  }
+
+  .avatar-wrapper {
+    @include avatar(80px);
+  }
+}
