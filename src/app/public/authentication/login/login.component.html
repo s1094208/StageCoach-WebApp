@@ -11,18 +11,39 @@
         <div class="head">
           <img src="/assets/logos/hogeschool_leiden.png">
         </div>
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="E-Mail">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="E-Mail"
+              formControlName="email">
+            <span
+              class="validation-message"
+              *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
+              Please enter a valid email address.
+            </span>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password">
+            <span
+              class="validation-message"
+              *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+              Please enter a password.
+            </span>
+          </div>
+          <div class="alert alert-danger auth-error" role="alert" *ngIf="authenticationError">
+            {{authenticationError}}
+          </div>
+          <div class="buttons">
+            <a class="btn password-lost float-right" routerLink="/recovery">Lost your password?</a>
+            <button class="btn btn-success login float-left" type="submit" [disabled]="!loginForm.valid" #submit>Login</button>
           </div>
         </form>
-        <div class="buttons">
-          <a class="btn password-lost float-right" routerLink="/recovery">Lost your password?</a>
-          <button class="btn btn-success login float-left" routerLink="/students/">Login</button>
-        </div>
         <div class="signup">
           <p>No account yet?</p><a routerLink="/register">Sign up!</a>
         </div>
