@@ -1,3 +1,24 @@
-<p>
-  register works!
-</p>
+<div class="page">
+  <div class="register-container">
+    <div class="head">
+      <img src="/assets/logos/hogeschool_leiden.png">
+    </div>
+    <div class="returner">
+      <button class="btn btn-danger return" routerLink="/auth/login">Go Back</button>
+    </div>
+    <form>
+      <div class="form-group">
+        <input #mail type="text" (input)="onMail(mail)" class="form-control" placeholder="E-Mail" required>
+      </div>
+      <div class="form-group">
+        <input #firstpass type="password" class="form-control" placeholder="Password" required>
+      </div>
+      <div class="form-group">
+        <input #secondpass type="password" class="form-control" placeholder="Repeat Password" required>
+      </div>
+    </form>
+    <div class="buttons">
+      <button (click)="onRegister(firstpass, secondpass)" class="btn btn-success register">Register</button>
+    </div>
+  </div>
+</div>
