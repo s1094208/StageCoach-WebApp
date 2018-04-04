@@ -10,9 +10,9 @@ import { RegisterComponent } from './public/authentication/register/register.com
 import { AuthService} from './shared/services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { StudentDashboardComponent } from './protected/students/student-dashboard/student-dashboard.component';
 import { AccountService } from './shared/services/account.service';
+import { JWT } from './jwt.config';
 
 @NgModule({
   declarations: [
@@ -29,11 +29,12 @@ import { AccountService } from './shared/services/account.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    JWT,
   ],
   providers: [
     AuthService,
     AccountService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

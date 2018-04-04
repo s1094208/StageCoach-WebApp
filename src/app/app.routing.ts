@@ -1,8 +1,8 @@
-import { Routes, RouterModule } from "@angular/router";
-import { AuthenticationComponent } from "./public/authentication/authentication.component";
-import { LoginComponent } from "./public/authentication/login/login.component";
-import { RegisterComponent } from "./public/authentication/register/register.component";
-import { RecoverComponent } from "./public/authentication/recover/recover.component";
+import { Routes, RouterModule } from '@angular/router';
+import { AuthenticationComponent } from './public/authentication/authentication.component';
+import { LoginComponent } from './public/authentication/login/login.component';
+import { RegisterComponent } from './public/authentication/register/register.component';
+import { RecoverComponent } from './public/authentication/recover/recover.component';
 import { StudentDashboardComponent } from './protected/students/student-dashboard/student-dashboard.component';
 
 const APP_ROUTES: Routes = [

@@ -16,7 +16,21 @@ export class AuthService {
     return this.httpClient.post<any>(this.API_URL + '/users/login', data);
   }
 
-  setAuthenticationToken(token: string) {
+  setAuthenticationToken (token: string) {
     localStorage.setItem('stagecoach.token', token);
+  }
+
+  getAuthenticationToken () {
+    return localStorage.getItem('stagecoach.token');
+  }
+
+  setTokenExpireDate (expiresOn: number) {
+    const date: any = new Date(1000 * expiresOn).toUTCString();
+    console.log(date);
+    localStorage.setItem('stagecoach.expireDate', date);
+  }
+
+  getTokenExpireDate () {
+    return localStorage.getItem('stagecoach.expireDate');
   }
 }

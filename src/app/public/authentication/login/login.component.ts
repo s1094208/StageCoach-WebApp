@@ -3,6 +3,7 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../../../shared/services/account.service';
 import {Router} from '@angular/router';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private accountService: AccountService,
-              private router: Router) {
+              private router: Router,
+              private jwtHelper: JwtHelperService) {
   }
 
   login() {
@@ -27,7 +29,10 @@ export class LoginComponent implements OnInit {
     this.submitButton.nativeElement.disabled = true;
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe((response: any) => {
+        const decoded = (this.jwtHelper.decodeToken(response.token));
+        const expiresOn = decoded.exp;
         this.authService.setAuthenticationToken(response.token);
+        this.authService.setTokenExpireDate(expiresOn);
         this.accountService.getAccountDetails()
           .subscribe((user: any) => {
             this.accountService.storeAccountDetails(user);
