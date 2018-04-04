@@ -34,6 +34,17 @@ p.paragraph + p.paragraph {
   margin-top: 10px;
 }
 
+input.ng-invalid.ng-touched {
+  border: solid 1px red;
+}
+
+.validation-message {
+  font-size: 10px;
+  color: red;
+}
+
+
+
 .back-to-top {
   position: fixed;
   bottom: 20px;
@@ -137,3 +148,4 @@ div.nav-profile-wrapper {
     @include avatar(80px);
   }
 }
+
