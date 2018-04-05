@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  mail = new FormControl();
 
   constructor() { }
 
@@ -26,7 +28,6 @@ export class RegisterComponent implements OnInit {
 
   onRegister(firstpass, secondpass) {
     if (firstpass.value != secondpass.value) {
-      //firstpass.borderColor
       alert("The entered passwords are not the same!");
     }
   }

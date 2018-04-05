@@ -8,7 +8,7 @@
     </div>
     <form>
       <div class="form-group">
-        <input #mail type="text" (input)="onMail(mail)" class="form-control" placeholder="E-Mail" required>
+        <input class="form-control" placeholder="E-Mail" [formControl]="mail">
       </div>
       <div class="form-group">
         <input #firstpass type="password" class="form-control" placeholder="Password" required>
