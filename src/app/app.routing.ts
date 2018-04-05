@@ -3,7 +3,8 @@ import { AuthenticationComponent } from './public/authentication/authentication.
 import { LoginComponent } from './public/authentication/login/login.component';
 import { RegisterComponent } from './public/authentication/register/register.component';
 import { RecoverComponent } from './public/authentication/recover/recover.component';
-import { StudentDashboardComponent } from './protected/students/student-dashboard/student-dashboard.component';
+import { StudentDashboardComponent } from './protected/student/student-dashboard/student-dashboard.component';
+import { StudentComponent } from './protected/student/student.component';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const APP_ROUTES: Routes = [
   },
   {
     path: 'students',
+    component: StudentComponent,
     children: [
       { path: 'dashboard', component: StudentDashboardComponent },
     ]

@@ -10,9 +10,10 @@ import { RegisterComponent } from './public/authentication/register/register.com
 import { AuthService} from './shared/services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { StudentDashboardComponent } from './protected/students/student-dashboard/student-dashboard.component';
+import { StudentDashboardComponent } from './protected/student/student-dashboard/student-dashboard.component';
 import { AccountService } from './shared/services/account.service';
 import { JWT } from './jwt.config';
+import { StudentComponent } from './protected/student/student.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { JWT } from './jwt.config';
     RegisterComponent,
     RecoverComponent,
     StudentDashboardComponent,
+    StudentComponent,
   ],
   imports: [
     BrowserModule,
