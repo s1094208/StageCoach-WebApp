@@ -18,4 +18,9 @@ export class AccountService {
   storeAccountDetails(user: Object) {
     this.user.next(user);
   }
+
+  requestRecoverEmail(email: string) {
+    const data = { email: email };
+    return this.httpClient.post(this.API_URL + '/account/recover', data);
+  }
 }

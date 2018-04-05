@@ -40,7 +40,7 @@
             {{authenticationError}}
           </div>
           <div class="buttons">
-            <a class="btn password-lost float-right" routerLink="/recovery">Lost your password?</a>
+            <a class="btn password-lost float-right" routerLink="/auth/recover">Lost your password?</a>
             <button class="btn btn-success login float-left" type="submit" [disabled]="!loginForm.valid" #submit>Login</button>
           </div>
         </form>
