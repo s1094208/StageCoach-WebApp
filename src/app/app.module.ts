@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './public/authentication/authentication.component';
 import { LoginComponent } from './public/authentication/login/login.component';
@@ -9,11 +8,12 @@ import { RecoverComponent } from './public/authentication/recover/recover.compon
 import { RegisterComponent } from './public/authentication/register/register.component';
 import { AuthService} from './shared/services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { StudentDashboardComponent } from './protected/student/student-dashboard/student-dashboard.component';
 import { AccountService } from './shared/services/account.service';
 import { JWT } from './jwt.config';
 import { StudentComponent } from './protected/student/student.component';
+import { ResetComponent } from './public/authentication/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { StudentComponent } from './protected/student/student.component';
     RecoverComponent,
     StudentDashboardComponent,
     StudentComponent,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,
