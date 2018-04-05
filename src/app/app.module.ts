@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StudentDashboardComponent } from './protected/students/student-dashboard/student-dashboard.component';
 import { AccountService } from './shared/services/account.service';
 import { JWT } from './jwt.config';
+import { ResetComponent } from './public/authentication/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { JWT } from './jwt.config';
     RegisterComponent,
     RecoverComponent,
     StudentDashboardComponent,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,

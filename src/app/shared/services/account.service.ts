@@ -23,4 +23,9 @@ export class AccountService {
     const data = { email: email };
     return this.httpClient.post(this.API_URL + '/account/recover', data);
   }
+
+  resetPasswordWithToken(token: string, password: string) {
+    const data = {token: token, password: password};
+    return this.httpClient.post(this.API_URL + '/account/reset', data);
+  }
 }

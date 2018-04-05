@@ -10,6 +10,7 @@ import {AccountService} from "../../../shared/services/account.service";
 export class RecoverComponent implements OnInit {
 
   protected recoverForm: FormGroup;
+  protected emailSent = false;
 
   constructor(private accountService: AccountService) { }
 
@@ -17,13 +18,13 @@ export class RecoverComponent implements OnInit {
     this.recoverForm = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
     });
-  };
+  }
 
   onSubmit() {
     this.accountService.requestRecoverEmail(this.recoverForm.value.email)
       .subscribe((response: any) => {
         console.log(response);
+        this.emailSent = true;
       });
-  };
-
+  }
 }
