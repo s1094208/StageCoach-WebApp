@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -7,28 +7,45 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  mail = new FormControl();
+  protected registerForm: FormGroup;
 
   constructor() { }
 
   ngOnInit() {
+    this.registerForm = new FormGroup({
+      mail: new FormControl('', Validators.required),
+      passwords: new FormGroup({
+        firstpass: new FormControl('', Validators.required),
+        secondpass: new FormControl('', Validators.required)
+      }, this.passwordMatchValidator),
+      firstName: new FormControl('', Validators.required),
+      middleName: new FormControl(''),
+      lastName: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required)
+    });
   }
 
-  onMail(mail) {
-    if (event['data'] == '@' && ((mail.value.match(/@/g) || []).length == 1)){
-      if (mail.value.includes("s") && mail.value.replace(/[^0-9]/g,"").length == 7){
-        console.log("Dit is een studenten mail!");
-        mail.value = mail.value + "student.hsleiden.nl";
-      } else {
-        console.log("Dit is geen studenten mail!");
-        mail.value = mail.value + "hsleiden.nl";
-      }
+  studentMail() {
+    if (this.registerForm.get('mail').value.includes("s") && this.registerForm.get('mail').value.replace(/[^0-9]/g,"").length == 7) {
+      console.log(this.registerForm.get('mail'));
+      return true;
+    } else {
+      return false;
     }
   }
 
-  onRegister(firstpass, secondpass) {
-    if (firstpass.value != secondpass.value) {
-      alert("The entered passwords are not the same!");
+  passwordMatchValidator(g: FormGroup) {
+    if (g.get('firstpass').value === g.get('secondpass').value){
+      if (!g.get('firstpass').valid || !g.get('secondpass').valid){
+        g.get('firstpass').setErrors(null);
+        g.get('secondpass').setErrors(null);
+        return null;
+      }
+    } else {
+      console.log("fouaaat");
+      g.get('firstpass').setErrors({'mismatch': true});
+      g.get('secondpass').setErrors({'mismatch': true});
+      return {'mismatch': true};
     }
   }
 

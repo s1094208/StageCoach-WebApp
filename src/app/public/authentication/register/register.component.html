@@ -6,19 +6,39 @@
     <div class="returner">
       <button class="btn btn-danger return" routerLink="/auth/login">Go Back</button>
     </div>
-    <form>
-      <div class="form-group">
-        <input class="form-control" placeholder="E-Mail" [formControl]="mail">
+    <form [formGroup]="registerForm">
+      <div class="input-group mb-3">
+        <input class="form-control" placeholder="E-Mail" formControlName="mail">
+        <div class="input-group-append">
+          <span class="input-group-text" *ngIf="studentMail()">@student.hsleiden.nl</span>
+          <span class="input-group-text" *ngIf="!studentMail()">@hsleiden.nl</span>
+        </div>
+      </div>
+      <div formGroupName="passwords">
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" formControlName="firstpass">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Repeat Password" formControlName="secondpass">
+        </div>
+        <span class="danger" *ngIf="registerForm.get('passwords').getError('mismatch')">The passwords are not equal!</span>
       </div>
       <div class="form-group">
-        <input #firstpass type="password" class="form-control" placeholder="Password" required>
+        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
       </div>
       <div class="form-group">
-        <input #secondpass type="password" class="form-control" placeholder="Repeat Password" required>
+        <input type="text" class="form-control" placeholder="Middle Name" formControlName="middleName">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <input type="tel" class="form-control" placeholder="Phone Number" formControlName="phone">
       </div>
     </form>
     <div class="buttons">
-      <button (click)="onRegister(firstpass, secondpass)" class="btn btn-success register">Register</button>
+      <button class="btn">Cancel</button>
+      <button class="btn btn-success register">Register</button>
     </div>
   </div>
 </div>
