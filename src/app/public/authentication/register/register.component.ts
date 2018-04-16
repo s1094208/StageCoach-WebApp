@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from "../../../shared/services/auth.service";
+import { JwtHelperService} from "@auth0/angular-jwt";
 
 @Component({
   selector: 'app-register',
@@ -8,8 +10,27 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   protected registerForm: FormGroup;
+  protected email: string;
 
-  constructor() { }
+  constructor(private authService: AuthService, private jwtHelper: JwtHelperService) { }
+
+  register() {
+    console.log("Even registreren hoor");
+    this.authService.register(this.email, this.registerForm.value.firstpass, this.registerForm.value.firstName,
+      this.registerForm.value.middleName, this.registerForm.value.lastName, this.registerForm.value.phone)
+      .subscribe((response: any) => {
+        const decoded = (this.jwtHelper.decodeToken(response.token));
+        const expiresOn = decoded.exp;
+        this.authService.setAuthenticationToken(response.token);
+        this.authService.setTokenExpireDate(expiresOn);
+      }, (err: any) => {
+        this.handleUnauthorizedError(err);
+      });
+  }
+
+  handleUnauthorizedError(err: any){
+    console.log(err);
+  }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -27,9 +48,10 @@ export class RegisterComponent implements OnInit {
 
   studentMail() {
     if (this.registerForm.get('mail').value.includes("s") && this.registerForm.get('mail').value.replace(/[^0-9]/g,"").length == 7) {
-      console.log(this.registerForm.get('mail'));
+      this.email = this.registerForm.get('mail').value + '@student.hsleiden.nl';
       return true;
     } else {
+      this.email = this.registerForm.get('mail').value + '@hsleiden.nl';
       return false;
     }
   }

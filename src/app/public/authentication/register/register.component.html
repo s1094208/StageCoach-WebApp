@@ -3,10 +3,7 @@
     <div class="head">
       <img src="/assets/logos/hogeschool_leiden.png">
     </div>
-    <div class="returner">
-      <button class="btn btn-danger return" routerLink="/auth/login">Go Back</button>
-    </div>
-    <form [formGroup]="registerForm">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="input-group mb-3">
         <input class="form-control" placeholder="E-Mail" formControlName="mail">
         <div class="input-group-append">
@@ -37,8 +34,8 @@
       </div>
     </form>
     <div class="buttons">
-      <button class="btn">Cancel</button>
-      <button class="btn btn-success register">Register</button>
+      <button class="btn btn-danger float-left" routerLink="/auth/login">Cancel</button>
+      <button class="btn btn-success register float-right" type="submit" [disabled]="!registerForm.valid" #submit>Register</button>
     </div>
   </div>
 </div>
