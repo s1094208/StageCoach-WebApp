@@ -16,6 +16,11 @@ export class AuthService {
     return this.httpClient.post<any>(this.API_URL + '/users/login', data);
   }
 
+  register(id: string, email: string, password: string, firstName: string, middleName: string, lastName: string, phone: string) {
+    const data = {id, email, password, firstName, middleName, lastName, phone};
+    return this.httpClient.post<any>(this.API_URL + '/users/signup', data);
+  }
+
   setAuthenticationToken (token: string) {
     localStorage.setItem('stagecoach.token', token);
   }

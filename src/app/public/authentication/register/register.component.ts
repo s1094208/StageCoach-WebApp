@@ -15,14 +15,14 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private jwtHelper: JwtHelperService) { }
 
   register() {
-    console.log("Even registreren hoor");
-    this.authService.register(this.email, this.registerForm.value.firstpass, this.registerForm.value.firstName,
-      this.registerForm.value.middleName, this.registerForm.value.lastName, this.registerForm.value.phone)
+    let middle = null;
+    if (this.registerForm.value.middleName != '') {
+      middle = this.registerForm.value.middleName;
+    }
+    let userId = this.registerForm.value.firstName[0] + '.' + this.registerForm.value.lastName;
+    this.authService.register(userId, this.email, this.registerForm.value.passwords['firstpass'], this.registerForm.value.firstName,
+      middle, this.registerForm.value.lastName, this.registerForm.value.phone)
       .subscribe((response: any) => {
-        const decoded = (this.jwtHelper.decodeToken(response.token));
-        const expiresOn = decoded.exp;
-        this.authService.setAuthenticationToken(response.token);
-        this.authService.setTokenExpireDate(expiresOn);
       }, (err: any) => {
         this.handleUnauthorizedError(err);
       });
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       middleName: new FormControl(''),
       lastName: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required)
+      phone: new FormControl('', [Validators.required, this.phoneLengthValidator])
     });
   }
 
@@ -68,6 +68,14 @@ export class RegisterComponent implements OnInit {
       g.get('firstpass').setErrors({'mismatch': true});
       g.get('secondpass').setErrors({'mismatch': true});
       return {'mismatch': true};
+    }
+  }
+
+  phoneLengthValidator(c: FormControl) {
+    if (c.value.length == 10 || c.value.length == 0) {
+      return null;
+    } else {
+      return {'wrongLength': true};
     }
   }
 

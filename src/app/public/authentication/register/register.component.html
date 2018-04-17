@@ -32,10 +32,11 @@
       <div class="form-group">
         <input type="tel" class="form-control" placeholder="Phone Number" formControlName="phone">
       </div>
+      <span class="danger" *ngIf="registerForm.get('phone').getError('wrongLength')">This is not a correct phone number!</span>
+      <div class="buttons">
+        <button class="btn btn-danger float-left" routerLink="/auth/login">Cancel</button>
+        <button class="btn btn-success register float-right" type="submit" [disabled]="!registerForm.valid">Register</button>
+      </div>
     </form>
-    <div class="buttons">
-      <button class="btn btn-danger float-left" routerLink="/auth/login">Cancel</button>
-      <button class="btn btn-success register float-right" type="submit" [disabled]="!registerForm.valid" #submit>Register</button>
-    </div>
   </div>
 </div>
