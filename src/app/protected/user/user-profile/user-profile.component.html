@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="col-lg-4 col-md-4 col-col-sm-12 d-inline-block">
+    <div class="profile-container">
+      <div class="header">
+        <div class="avatar">
+          <img src=""/>
+        </div>
+        <div class="info">
+          <h1>{{user?.firstName}} {{user?.middleName}} {{user?.lastName}}</h1>
+          <p>Currently an intern at <br> <a class="text-primary">Company A.B.C</a></p>
+        </div>
+      </div>
+    </div>
+    <a href="http://linkedin.com/in/{{user?.linkedIn}}" target="_blank" class="profile-container" id="linkedIn">
+      <p class="text-dark">Go to LinkedIn</p>
+      <div class="icon"><i class="fab fa-linkedin-in"></i></div>
+    </a>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-12 d-inline-block align-top">
+    <div class="profile-container profile-edit">
+      <form [formGroup]="editUserInfoForm">
+        <label>Name</label>
+        <div class="form-row mb-3">
+          <div class="col-5">
+            <input type="text" class="form-control" placeholder="First name" formControlName="firstName">
+            <span
+              class="validation-message"
+              *ngIf="!editUserInfoForm.get('firstName').valid && editUserInfoForm.get('firstName').touched">
+              Please enter a valid first name.
+            </span>
+          </div>
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="" formControlName="middleName">
+            <span
+              class="validation-message"
+              *ngIf="!editUserInfoForm.get('middleName').valid && editUserInfoForm.get('middleName').touched">
+              Please enter a valid middle name.
+            </span>
+          </div>
+          <div class="col-5">
+            <input type="text" class="form-control" placeholder="Last name" formControlName="lastName">
+            <span
+              class="validation-message"
+              *ngIf="!editUserInfoForm.get('lastName').valid && editUserInfoForm.get('lastName').touched">
+              Please enter a valid last name.
+            </span>
+          </div>
+        </div>
+        <label>Contact</label>
+        <div class="form-row mb-3">
+          <div class="col-7">
+            <input type="text" class="form-control" placeholder="Email" formControlName="email">
+          </div>
+          <div class="col-5">
+            <input type="text" class="form-control" placeholder="Phone" formControlName="phone">
+            <span
+              class="validation-message"
+              *ngIf="!editUserInfoForm.get('phone').valid && editUserInfoForm.get('phone').touched">
+              Please enter a valid phone number.
+            </span>
+          </div>
+        </div>
+        <label>Social links</label>
+        <div class="form-row mb-3">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="LinkedIn profile link" formControlName="linkedIn">
+            <span
+              class="validation-message"
+              *ngIf="!editUserInfoForm.get('linkedIn').valid && editUserInfoForm.get('linkedIn').touched">
+              Please enter a valid phone number.
+            </span>
+          </div>
+        </div>
+        <div class="form-row mb-3">
+          <div class="col">
+            <label>Account created at:</label>
+            <input type="text" class="form-control" placeholder="DD-MM-YYYY" formControlName="createdAt">
+          </div>
+          <div class="col">
+            <label>Account last updated at:</label>
+            <input type="text" class="form-control" placeholder="DD-MM-YYYY" formControlName="updatedAt">
+          </div>
+        </div>
+        <div class="form-row justify-content-end position-relative">
+          <button class="btn btn-primary mr-1" *ngIf="editUserInfoForm.disabled" (click)="setFormEditable()">Edit</button>
+          <button class="btn btn-danger mr-1" *ngIf="editUserInfoForm.enabled" (click)="setFormDisabled()">Cancel</button>
+          <button class="btn btn-success mr-1" *ngIf="editUserInfoForm.enabled" (click)="saveUserInfoChanges()">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="profile-container reset-password d-block">
+      <p class="w-100 d-block mb-2">If you wish to change your password, you can click the button below. We will send you an email with instructions.</p>
+      <button class="btn btn-primary d-block w-100" [disabled]="requestPasswordChangeButtonDisabled" (click)="requestPasswordChange()">Change Password</button>
+      <p class="mt-2 text-success" *ngIf="requestPasswordChangeStatus">We've sent an email to your address!</p>
+      <p class="mt-2 text-danger" *ngIf="requestPasswordChangeStatus === false">We were unable to send an email to your address...</p>
+    </div>
+
+    <div class="profile-container"  id="linkedIn-feed">
+        No feed to show yet.
+    </div>
+  </div>
+</div>

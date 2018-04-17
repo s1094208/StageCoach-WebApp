@@ -14,6 +14,10 @@ import { AccountService } from './shared/services/account.service';
 import { JWT } from './jwt.config';
 import { StudentComponent } from './protected/student/student.component';
 import { ResetComponent } from './public/authentication/reset/reset.component';
+import { UserProfileComponent } from './protected/user/user-profile/user-profile.component';
+import { ProtectedComponent } from './protected/protected.component';
+import {UserService} from './shared/services/user.service';
+import {UserResolve} from './shared/resolvers/user.resolve';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,8 @@ import { ResetComponent } from './public/authentication/reset/reset.component';
     StudentDashboardComponent,
     StudentComponent,
     ResetComponent,
+    UserProfileComponent,
+    ProtectedComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,10 @@ import { ResetComponent } from './public/authentication/reset/reset.component';
   providers: [
     AuthService,
     AccountService,
+    UserService,
+
+    // Resolves
+    UserResolve,
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

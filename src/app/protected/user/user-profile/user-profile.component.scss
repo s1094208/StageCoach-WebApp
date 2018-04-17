@@ -1,0 +1,93 @@
+@import "../../../../../src/styles.scss";
+
+
+.profile-container {
+  position: relative;
+  background-color: white;
+  border: solid 1px $sc_grey;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 999px;
+      background-color: grey;
+      display: flex;
+      justify-content: center;
+    }
+
+    .info {
+      vertical-align: top;
+      text-align: center;
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 0;
+        margin-top: 5px;
+      }
+
+      p {
+
+      }
+    }
+  }
+}
+
+#linkedIn {
+  text-align: left;
+  justify-content: start;
+
+  &:hover {
+    background-color: rgba(37, 85, 136, 0.07);
+    cursor: pointer;
+  }
+
+  .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 40px;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i, svg {
+      color: white;
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+      overflow: hidden;
+    }
+  }
+}
+
+.internship-list {
+  height: 200px;
+  width: 100%;
+  background-color: blue;
+}
+
+form {
+  width: 100%;
+}
+
+.reset-password {
+  p {
+    text-align: center;
+  }
+}

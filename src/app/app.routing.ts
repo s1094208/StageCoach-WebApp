@@ -6,6 +6,9 @@ import { RecoverComponent } from './public/authentication/recover/recover.compon
 import { StudentDashboardComponent } from './protected/student/student-dashboard/student-dashboard.component';
 import { StudentComponent } from './protected/student/student.component';
 import {ResetComponent} from './public/authentication/reset/reset.component';
+import {UserProfileComponent} from './protected/user/user-profile/user-profile.component';
+import {ProtectedComponent} from './protected/protected.component';
+import {UserResolve} from './shared/resolvers/user.resolve';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -21,10 +24,22 @@ const APP_ROUTES: Routes = [
     ]
   },
   {
-    path: 'students',
-    component: StudentComponent,
+    path: 'secure',
+    component: ProtectedComponent,
     children: [
-      { path: 'dashboard', component: StudentDashboardComponent },
+      {
+        path: 'students',
+        component: StudentComponent,
+        children: [
+          { path: 'dashboard', component: StudentDashboardComponent },
+        ]
+      },
+      {
+        path: 'user',
+        children: [
+          { path: 'profile/:id', component: UserProfileComponent, resolve: { user: UserResolve }},
+        ]
+      }
     ]
   }
 ];
