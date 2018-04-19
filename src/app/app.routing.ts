@@ -3,7 +3,12 @@ import { AuthenticationComponent } from './public/authentication/authentication.
 import { LoginComponent } from './public/authentication/login/login.component';
 import { RegisterComponent } from './public/authentication/register/register.component';
 import { RecoverComponent } from './public/authentication/recover/recover.component';
-import { StudentDashboardComponent } from './protected/students/student-dashboard/student-dashboard.component';
+import { StudentDashboardComponent } from './protected/student/student-dashboard/student-dashboard.component';
+import { StudentComponent } from './protected/student/student.component';
+import {ResetComponent} from './public/authentication/reset/reset.component';
+import {UserProfileComponent} from './protected/user/user-profile/user-profile.component';
+import {ProtectedComponent} from './protected/protected.component';
+import {UserResolve} from './shared/resolvers/user.resolve';
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -14,12 +19,27 @@ const APP_ROUTES: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent},
       { path: 'recover', component: RecoverComponent },
+      { path: 'reset', component: ResetComponent },
+      { path: 'reset/:token', component: ResetComponent },
     ]
   },
   {
-    path: 'students',
+    path: 'secure',
+    component: ProtectedComponent,
     children: [
-      { path: 'dashboard', component: StudentDashboardComponent },
+      {
+        path: 'students',
+        component: StudentComponent,
+        children: [
+          { path: 'dashboard', component: StudentDashboardComponent },
+        ]
+      },
+      {
+        path: 'user',
+        children: [
+          { path: 'profile/:id', component: UserProfileComponent, resolve: { user: UserResolve }},
+        ]
+      }
     ]
   }
 ];

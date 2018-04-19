@@ -12,17 +12,17 @@
           <img src="/assets/logos/hogeschool_leiden.png">
         </div>
         <hr>
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <input
               type="text"
               class="form-control"
-              placeholder="E-Mail"
-              formControlName="email">
+              placeholder="Token"
+              formControlName="token">
             <span
               class="validation-message"
-              *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
-              Please enter a valid email address.
+              *ngIf="!resetForm.get('token').valid && resetForm.get('token').touched">
+              Please enter a valid token.
             </span>
           </div>
           <div class="form-group">
@@ -33,21 +33,26 @@
               formControlName="password">
             <span
               class="validation-message"
-              *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
-              Please enter a password.
+              *ngIf="!resetForm.get('password').valid && resetForm.get('password').touched">
+              Please enter a valid password.
             </span>
           </div>
-          <div class="alert alert-danger auth-error" role="alert" *ngIf="authenticationError">
-            {{authenticationError}}
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password again"
+              formControlName="passwordRepeat">
+            <span
+              class="validation-message"
+              *ngIf="!resetForm.get('passwordRepeat').valid && resetForm.get('passwordRepeat').touched">
+              Please repeat the password.
+            </span>
           </div>
           <div class="buttons">
-            <a class="btn password-lost float-right" routerLink="/auth/recover">Lost your password?</a>
-            <button class="btn btn-success login float-left" type="submit" [disabled]="!loginForm.valid" #submit>Login</button>
+            <button class="btn btn-success login float-left" type="submit" [disabled]="!resetForm.valid" #submit>Sent</button>
           </div>
         </form>
-        <div class="signup">
-          <p>No account yet?</p><a routerLink="/auth/register">Sign up!</a>
-        </div>
       </div>
     </div>
   </div>

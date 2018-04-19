@@ -1,3 +1,43 @@
-<p>
-  recover works!
-</p>
+<div class="page">
+  <div class="left">
+    <img src="/assets/images/background-left.jpg">
+  </div>
+  <div class="right">
+    <div class="stagecoach">
+      <h1>StageCoach</h1>
+    </div>
+    <div class="right-container">
+      <div class="recover-container">
+        <div class="head">
+          <img src="/assets/logos/hogeschool_leiden.png">
+        </div>
+        <hr>
+        <form *ngIf="!emailSent" [formGroup]="recoverForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="E-Mail"
+              formControlName="email">
+            <span
+              class="validation-message"
+              *ngIf="!recoverForm.get('email').valid && recoverForm.get('email').touched">
+              Please enter a valid email address.
+            </span>
+          </div>
+          <div class="buttons">
+            <a class="btn password-lost float-right" routerLink="/auth/login">Back to login</a>
+            <button class="btn btn-success login float-left" type="submit" [disabled]="!recoverForm.valid" #submit>Sent</button>
+          </div>
+        </form>
+        <div *ngIf="emailSent">
+          <p class="mb-1">
+            We've send an email with instructions to the following address: <br>
+          </p>
+          <a class="text-primary mt-1">{{recoverForm.get('email').value}}</a>
+          <button class="btn btn-primary mt-2 btn-block" routerLink="/auth/login">Ok, thank you!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

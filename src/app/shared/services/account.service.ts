@@ -7,7 +7,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class AccountService {
 
   private API_URL = environment.api_url;
-  private user = new BehaviorSubject<any>(undefined);
+  private user: BehaviorSubject<any> = JSON.parse(localStorage.getItem('stagecoach.user'));
 
   constructor(private httpClient: HttpClient) {}
 
@@ -15,7 +15,18 @@ export class AccountService {
     return this.httpClient.get(this.API_URL + '/account');
   }
 
-  storeAccountDetails(user: Object) {
-    this.user.next(user);
+  requestRecoverEmail(email: string) {
+    const data = { email: email };
+    return this.httpClient.post(this.API_URL + '/account/recover', data);
+  }
+
+  resetPasswordWithToken(token: string, password: string) {
+    const data = {token: token, password: password};
+    return this.httpClient.post(this.API_URL + '/account/reset', data);
+  }
+
+  updateAccountInfo(accountInfo: any) {
+    const id = JSON.parse(localStorage.getItem('stagecoach.user')).id;
+    return this.httpClient.put(this.API_URL + '/users/' + id, accountInfo);
   }
 }

@@ -71,6 +71,10 @@ input.ng-invalid.ng-touched {
   width: 100%;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 a.link {
   color: $primary !important;
 }
@@ -79,9 +83,6 @@ a.link {
   vertical-align: middle;
 }
 
-*.d-inline-block:not(:first-child) {
-  margin-left: -4px;
-}
 
 nav {
   padding-left: 25px !important;
@@ -108,16 +109,6 @@ div.nav-profile-wrapper {
     }
   }
 }
-
-.content {
-  background-color: white;
-  color: black;
-  margin-top: 25px;
-  border-radius: 8px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 
 @mixin avatar($width) {
   display: inline-block;
@@ -162,4 +153,3 @@ div.nav-profile-wrapper {
     @include avatar(80px);
   }
 }
-

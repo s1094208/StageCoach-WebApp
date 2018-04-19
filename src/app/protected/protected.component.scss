@@ -1,0 +1,42 @@
+.navbar-brand img {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 80px;
+}
+
+.nav-profile-wrapper {
+  position: absolute;
+  right: 20px;
+  top: 7px;
+}
+
+.content {
+  margin-top: 25px;
+}
+
+nav {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+
+div.nav-profile-wrapper {
+  height: 100%;
+  margin-top: 4px; // Positioning middle adjustments
+
+  a.nav-profile {
+    color: white;
+    text-decoration: none;
+    margin-top: 4px; // Positioning middle adjustments
+
+    .avatar-wrapper {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      background-color: white;
+      vertical-align: middle;
+      margin-top: -4px; // Positioning middle adjustments
+      margin-left: 2px;
+    }
+  }
+}

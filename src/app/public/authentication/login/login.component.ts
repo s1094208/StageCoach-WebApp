@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../../../shared/services/account.service';
 import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {UserService} from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private accountService: AccountService,
               private router: Router,
-              private jwtHelper: JwtHelperService) {
+              private jwtHelper: JwtHelperService,
+              private userService: UserService) {
   }
 
   login() {
@@ -35,10 +37,10 @@ export class LoginComponent implements OnInit {
         this.authService.setTokenExpireDate(expiresOn);
         this.accountService.getAccountDetails()
           .subscribe((user: any) => {
-            this.accountService.storeAccountDetails(user);
+            this.userService.setCurrentUser(user);
 
             if (user.roles.indexOf('Student') >= 0) {
-              this.router.navigate(['/students/dashboard']);
+              this.router.navigate(['/secure/students/dashboard']);
             } else if (user.roles.length > 0) {
               console.log('Yo\'re not a student');
             }
