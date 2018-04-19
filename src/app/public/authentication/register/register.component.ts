@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "../../../shared/services/auth.service";
 import { JwtHelperService} from "@auth0/angular-jwt";
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -9,20 +10,22 @@ import { JwtHelperService} from "@auth0/angular-jwt";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
   protected registerForm: FormGroup;
   protected email: string;
+  protected roleTitle: string;
 
-  constructor(private authService: AuthService, private jwtHelper: JwtHelperService) { }
+  constructor(private authService: AuthService, private jwtHelper: JwtHelperService, private router: Router) { }
 
   register() {
     let middle = null;
     if (this.registerForm.value.middleName != '') {
       middle = this.registerForm.value.middleName;
     }
-    let userId = this.registerForm.value.firstName[0] + '.' + this.registerForm.value.lastName;
-    this.authService.register(userId, this.email, this.registerForm.value.passwords['firstpass'], this.registerForm.value.firstName,
-      middle, this.registerForm.value.lastName, this.registerForm.value.phone)
+    this.authService.register(this.registerForm.value.mail, this.email, this.registerForm.value.passwords['firstpass'], this.registerForm.value.firstName,
+      middle, this.registerForm.value.lastName, this.registerForm.value.phone, this.roleTitle)
       .subscribe((response: any) => {
+        this.router.navigate(['auth/login']);
       }, (err: any) => {
         this.handleUnauthorizedError(err);
       });
@@ -36,7 +39,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       mail: new FormControl('', Validators.required),
       passwords: new FormGroup({
-        firstpass: new FormControl('', Validators.required),
+        firstpass: new FormControl('', [Validators.required, Validators.minLength(8), this.correctPasswordValidator]),
         secondpass: new FormControl('', Validators.required)
       }, this.passwordMatchValidator),
       firstName: new FormControl('', Validators.required),
@@ -49,24 +52,32 @@ export class RegisterComponent implements OnInit {
   studentMail() {
     if (this.registerForm.get('mail').value.includes("s") && this.registerForm.get('mail').value.replace(/[^0-9]/g,"").length == 7) {
       this.email = this.registerForm.get('mail').value + '@student.hsleiden.nl';
+      this.roleTitle = 'Student';
       return true;
     } else {
       this.email = this.registerForm.get('mail').value + '@hsleiden.nl';
+      this.roleTitle = 'Monitor';
       return false;
+    }
+  }
+
+  correctPasswordValidator(c: FormControl) {
+    if (/\d/.test(c.value) && /[a-z]/.test(c.value) && /[A-Z]/.test(c.value) && /[!@#$%^&*]/.test(c.value)) {
+      return null;
+    } else {
+      return {'wrongPassword': true};
     }
   }
 
   passwordMatchValidator(g: FormGroup) {
     if (g.get('firstpass').value === g.get('secondpass').value){
       if (!g.get('firstpass').valid || !g.get('secondpass').valid){
-        g.get('firstpass').setErrors(null);
-        g.get('secondpass').setErrors(null);
+        g.setErrors({'mismatch': false});
         return null;
       }
     } else {
       console.log("fouaaat");
-      g.get('firstpass').setErrors({'mismatch': true});
-      g.get('secondpass').setErrors({'mismatch': true});
+      g.setErrors({'mismatch': true});
       return {'mismatch': true};
     }
   }

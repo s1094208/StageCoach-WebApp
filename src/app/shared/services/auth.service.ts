@@ -16,8 +16,9 @@ export class AuthService {
     return this.httpClient.post<any>(this.API_URL + '/users/login', data);
   }
 
-  register(id: string, email: string, password: string, firstName: string, middleName: string, lastName: string, phone: string) {
-    const data = {id, email, password, firstName, middleName, lastName, phone};
+  register(id: string, email: string, password: string, firstName: string, middleName: string, lastName: string, phone: string, roleTitle: string) {
+    const userId = id;
+    const data = {id, email, password, firstName, middleName, lastName, phone, roleTitle, userId};
     return this.httpClient.post<any>(this.API_URL + '/users/signup', data);
   }
 

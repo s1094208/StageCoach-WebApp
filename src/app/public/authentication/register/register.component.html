@@ -1,41 +1,61 @@
 <div class="page">
-  <div class="register-container">
-    <div class="head">
-      <img src="/assets/logos/hogeschool_leiden.png">
+  <div class="container col-xl-4 offset-xl-4 col-md-8 offset-md-2 col-xs-12 offset-xs-0">
+    <div class="row justify-content-center">
+          <img src="/assets/logos/hogeschool_leiden.png">
     </div>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <form id="registerForm" [formGroup]="registerForm" (ngSubmit)="register()">
+      <label>E-mail</label>
       <div class="input-group mb-3">
-        <input class="form-control" placeholder="E-Mail" formControlName="mail">
+        <input class="form-control" placeholder="Please enter your e-mail" formControlName="mail">
         <div class="input-group-append">
           <span class="input-group-text" *ngIf="studentMail()">@student.hsleiden.nl</span>
           <span class="input-group-text" *ngIf="!studentMail()">@hsleiden.nl</span>
         </div>
       </div>
+
       <div formGroupName="passwords">
-        <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password" formControlName="firstpass">
+        <div class="label-group">
+          <label>Password</label>
+          <span class="input-info">
+          The password should be at least 8 characters long, and consist of at least: one uppercase letter, a number, and a special character.
+          </span>
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Repeat Password" formControlName="secondpass">
+          <input type="password" class="form-control" placeholder="Please enter your password" formControlName="firstpass">
+          <span class="validation-message" *ngIf="registerForm.get('passwords').touched && registerForm.get('passwords').get('firstpass').getError('wrongPassword')">
+            Make sure your password follows the regulations.
+          </span>
         </div>
-        <span class="danger" *ngIf="registerForm.get('passwords').getError('mismatch')">The passwords are not equal!</span>
+
+        <label>Repeat password</label>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Please repeat your password" formControlName="secondpass">
+          <span class="danger"
+                *ngIf="registerForm.get('passwords').getError('mismatch')">The passwords are not equal!</span>
+        </div>
       </div>
+
+      <label>Name</label>
+      <div class="form-row mb-3">
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="Middle Name" formControlName="middleName">
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+        </div>
+      </div>
+      <label>Telephone</label>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+        <input type="tel" class="form-control" placeholder="Please enter your phone number" formControlName="phone">
       </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Middle Name" formControlName="middleName">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
-      </div>
-      <div class="form-group">
-        <input type="tel" class="form-control" placeholder="Phone Number" formControlName="phone">
-      </div>
-      <span class="danger" *ngIf="registerForm.get('phone').getError('wrongLength')">This is not a correct phone number!</span>
-      <div class="buttons">
-        <button class="btn btn-danger float-left" routerLink="/auth/login">Cancel</button>
-        <button class="btn btn-success register float-right" type="submit" [disabled]="!registerForm.valid">Register</button>
+      <span class="danger"
+            *ngIf="registerForm.get('phone').getError('wrongLength')">This is not a correct phone number!</span>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-danger mr-2" routerLink="/auth/login">Cancel</button>
+        <button class="btn btn-success register" type="submit" [disabled]="!registerForm.valid">Register</button>
       </div>
     </form>
   </div>

@@ -38,6 +38,20 @@ input.ng-invalid.ng-touched {
   border: solid 1px red;
 }
 
+.label-group {
+  label {
+    margin-bottom: 2px;
+  }
+}
+
+.input-info {
+  display: block;
+  font-size: 10px;
+  color: #9b9b9b;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
 .validation-message {
   font-size: 10px;
   color: red;

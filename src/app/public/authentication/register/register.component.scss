@@ -1,31 +1,13 @@
-.page {
-  height: 100vh;
+form#registerForm {
+  padding: 15px;
   background-color: white;
-  > div {
-    display: inline-block;
-  }
-
-  .returner {
-    padding: 5px 5px 25px 5px;
-  }
-
-  .register-container {
-    margin-left: 500px;
-    width: 500px;
-
-    .head {
-
-      img {
-        width: 80%;
-      }
-
-    }
-  }
-
-  .buttons {
-
-    .register {
-      margin-left: 200px;
-    }
-  }
+  border-radius: 8px;
+  border: 1px solid #ced4da;
 }
+
+  img {
+    width: 60%;
+    height: 60%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
