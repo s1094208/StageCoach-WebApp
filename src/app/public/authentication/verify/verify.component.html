@@ -1,0 +1,16 @@
+<div class="page">
+  <div class="container col-xl-4 offset-xl-4 col-md-8 offset-md-2 col-xs-12 offset-xs-0">
+    <div class="row justify-content-center">
+      <img src="/assets/logos/hogeschool_leiden.png">
+    </div>
+    <br><br>
+    <div class="row justify-content-center" *ngIf="outcome; else errormessage">
+      <h5>Please wait a moment. Verifying account...
+        <img src="./assets/icons/loading_spinner.gif" height="20px" width="20px">
+      </h5>
+    </div>
+    <ng-template #errormessage>
+      <h5>Could not verify account.</h5>
+    </ng-template>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import { UserProfileComponent } from './protected/user/user-profile/user-profile
 import { ProtectedComponent } from './protected/protected.component';
 import {UserService} from './shared/services/user.service';
 import {UserResolve} from './shared/resolvers/user.resolve';
+import { VerifyComponent } from './public/authentication/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {UserResolve} from './shared/resolvers/user.resolve';
     ResetComponent,
     UserProfileComponent,
     ProtectedComponent,
+    VerifyComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,4 +29,9 @@ export class AccountService {
     const id = JSON.parse(localStorage.getItem('stagecoach.user')).id;
     return this.httpClient.put(this.API_URL + '/users/' + id, accountInfo);
   }
+
+  verifyAccount(token: string) {
+    const data = {token: token};
+    return this.httpClient.post(this.API_URL + '/account/verify', data);
+  }
 }

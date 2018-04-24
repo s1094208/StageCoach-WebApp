@@ -9,6 +9,7 @@ import {ResetComponent} from './public/authentication/reset/reset.component';
 import {UserProfileComponent} from './protected/user/user-profile/user-profile.component';
 import {ProtectedComponent} from './protected/protected.component';
 import {UserResolve} from './shared/resolvers/user.resolve';
+import {VerifyComponent} from "./public/authentication/verify/verify.component";
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const APP_ROUTES: Routes = [
       { path: 'recover', component: RecoverComponent },
       { path: 'reset', component: ResetComponent },
       { path: 'reset/:token', component: ResetComponent },
+      { path: 'verify/:token', component: VerifyComponent },
     ]
   },
   {
