@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "../../../shared/services/auth.service";
-import { JwtHelperService} from "@auth0/angular-jwt";
 import { Router} from "@angular/router";
 
 @Component({
@@ -11,11 +10,11 @@ import { Router} from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
 
-  protected registerForm: FormGroup;
-  protected email: string;
-  protected roleTitle: string;
+  registerForm: FormGroup;
+  email: string;
+  roleTitle: string;
 
-  constructor(private authService: AuthService, private jwtHelper: JwtHelperService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   register() {
     let middle = null;
